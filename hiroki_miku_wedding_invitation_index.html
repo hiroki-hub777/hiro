@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hiroki & Miku | Wedding Invitation</title>
+    <meta name="description" content="Hiroki & Miku の結婚式ご招待ページ。日時・会場・アクセス・出欠フォームをご確認ください。" />
+    <meta property="og:title" content="Hiroki & Miku | Wedding Invitation" />
+    <meta property="og:description" content="結婚式のご案内と出欠のご回答はこちら。" />
+    <meta property="og:type" content="website" />
+    <meta name="color-scheme" content="light dark" />
+    <style>
+      /* ==========================
+         Base & Theme
+      ========================== */
+      :root {
+        --bg: #0b0c10;
+        --bg-soft: #111217;
+        --card: #151821;
+        --ink: #edf2f7;
+        --ink-dim: #bac3cf;
+        --accent: #d7ff7e; /* soft lime */
+        --accent-2: #8ad6ff; /* soft blue */
+        --link: #a7f0ff;
+        --muted: #7b8794;
+        --border: #262b36;
+        --shadow: 0 10px 25px rgba(0,0,0,.25);
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #fbfbfe;
+          --bg-soft: #f3f4f8;
+          --card: #ffffff;
+          --ink: #0f172a;
+          --ink-dim: #334155;
+          --accent: #1a9bff;
+          --accent-2: #7c3aed;
+          --link: #0046ff;
+          --border: #e6e8ef;
+          --shadow: 0 10px 25px rgba(10,10,10,.06);
+        }
+      }
+
+      * { box-sizing: border-box; }
+      html,body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+        color: var(--ink);
+        background: radial-gradient(1200px 600px at 70% -100px, rgba(138,214,255,.12), transparent 60%),
+                    radial-gradient(800px 500px at -10% -50px, rgba(215,255,126,.10), transparent 70%),
+                    var(--bg);
+        line-height: 1.6;
+        letter-spacing: .02em;
+      }
+      a { color: var(--link); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      .container { width: min(100%, 1100px); margin: 0 auto; padding: 0 20px; }
+
+      /* ==========================
+         Header / Hero
+      ========================== */
+      header {
+        position: sticky; top: 0; z-index: 50;
+        backdrop-filter: saturate(1.2) blur(10px);
+        background: color-mix(in lab, var(--bg) 70%, transparent);
+        border-bottom: 1px solid var(--border);
+      }
+      .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+      .brand { font-weight: 700; letter-spacing: .06em; }
+      .nav a { margin-left: 14px; font-size: .95rem; color: var(--ink-dim); }
+      .nav a:hover { color: var(--ink); }
+
+      .hero {
+        position: relative; isolation: isolate;
+        padding: clamp(56px, 10vw, 100px) 0 clamp(36px, 6vw, 56px);
+      }
+      .hero::after {
+        content: ""; position: absolute; inset: 0; z-index: -1;
+        background: radial-gradient(600px 300px at 20% 10%, rgba(167,240,255,.12), transparent 60%),
+                    radial-gradient(500px 280px at 80% 0%, rgba(124,58,237,.10), transparent 60%);
+        pointer-events: none;
+      }
+      .title {
+        font-size: clamp(40px, 9vw, 82px);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: .02em;
+        margin: 0 0 10px;
+      }
+      .subtitle { color: var(--ink-dim); margin: 0 0 22px; font-size: clamp(16px, 2.3vw, 18px); }
+      .pill {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 10px 14px; border: 1px solid var(--border);
+        border-radius: 999px; background: color-mix(in lab, var(--card) 80%, transparent);
+        box-shadow: var(--shadow);
+      }
+      .pill .dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; display: inline-block; }
+      .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+        padding: 12px 18px; border-radius: 14px; border: 1px solid var(--border);
+        background: var(--card); color: var(--ink); font-weight: 600;
+        box-shadow: var(--shadow); cursor: pointer;
+      }
+      .btn:hover { transform: translateY(-1px); }
+      .btn.primary { background: linear-gradient(180deg, var(--accent), color-mix(in lab, var(--accent) 60%, #fff 0%)); color: #0a0a0a; border-color: transparent; }
+
+      /* ==========================
+         Sections
+      ========================== */
+      section { padding: clamp(40px, 6vw, 80px) 0; }
+      h2 { font-size: clamp(24px, 4.5vw, 36px); margin: 0 0 16px; letter-spacing: .04em; }
+      p.lead { color: var(--ink-dim); font-size: 1.05rem; }
+
+      .card { background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 20px; box-shadow: var(--shadow); }
+      .grid { display: grid; gap: 18px; }
+      .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+      .grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+      @media (max-width: 900px) { .grid.cols-3 { grid-template-columns: 1fr; } }
+      @media (max-width: 720px) { .grid.cols-2 { grid-template-columns: 1fr; } }
+
+      .kv { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: center; }
+      @media (max-width: 900px) { .kv { grid-template-columns: 1fr; } }
+
+      .photo {
+        aspect-ratio: 4 / 3; border-radius: 20px; overflow: hidden; border: 1px solid var(--border);
+        background: linear-gradient(135deg, rgba(26,155,255,.25), rgba(124,58,237,.25));
+        display: grid; place-items: center; color: #fff; font-weight: 700; letter-spacing: .06em;
+      }
+
+      .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+      @media (max-width: 700px) { .facts { grid-template-columns: 1fr; } }
+      .fact { padding: 14px; border: 1px dashed var(--border); border-radius: 14px; }
+      .fact b { display: block; font-size: .9rem; color: var(--ink-dim); }
+      .fact span { font-size: 1.1rem; font-weight: 700; }
+
+      .timeline { position: relative; padding-left: 22px; }
+      .timeline::before { content: ""; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+      .tl-item { position: relative; padding: 12px 0 12px 10px; }
+      .tl-item::before { content: ""; position: absolute; left: -1px; top: 18px; width: 10px; height: 10px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 3px color-mix(in lab, var(--accent) 30%, transparent); }
+      .tl-time { font-weight: 700; }
+      .tl-note { color: var(--ink-dim); font-size: .95rem; }
+
+      .map { width: 100%; height: 340px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+      iframe { width: 100%; height: 100%; border: 0; }
+
+      form.rsvp { display: grid; gap: 14px; }
+      .field { display: grid; gap: 6px; }
+      label { font-weight: 600; font-size: .95rem; }
+      input[type="text"], input[type="email"], textarea, select {
+        background: var(--bg-soft); color: var(--ink); border: 1px solid var(--border); border-radius: 12px;
+        padding: 12px 14px; font: inherit; outline: none;
+      }
+      textarea { min-height: 110px; resize: vertical; }
+      .hint { color: var(--muted); font-size: .9rem; }
+
+      .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+      @media (max-width: 900px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 600px) { .gallery { grid-template-columns: 1fr; } }
+      .thumb { aspect-ratio: 1 / 1; border-radius: 12px; background: linear-gradient(135deg, rgba(167,240,255,.25), rgba(215,255,126,.2)); border: 1px solid var(--border); }
+
+      footer { padding: 50px 0; color: var(--ink-dim); text-align: center; border-top: 1px solid var(--border); }
+
+      /* Print (for紙の招待状) */
+      @media print {
+        header, .hero-actions, .gallery, .map, .rsvp-actions { display: none !important; }
+        body { background: #fff; color: #111; }
+        .card { border-color: #ddd; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <div class="brand">Hiroki & Miku</div>
+        <nav aria-label="メイン">
+          <a href="#details">ご案内</a>
+          <a href="#schedule">タイムライン</a>
+          <a href="#access">アクセス</a>
+          <a href="#rsvp">出欠</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container kv">
+          <div>
+            <div class="pill" aria-live="polite" aria-atomic="true">
+              <span class="dot" aria-hidden="true"></span>
+              <span id="countdown">12/06/2025 まであと — 日</span>
+            </div>
+            <h1 class="title">Hiroki & Miku</h1>
+            <p class="subtitle">結婚式のご案内ページへようこそ。<br/>心ばかりのおもてなしをご用意して、皆さまのお越しを楽しみにお待ちしています。</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#rsvp" aria-label="出欠回答に進む">出欠を回答する</a>
+              <button class="btn" id="addToCalendar" type="button">カレンダーに追加（.ics）</button>
+              <a class="btn" id="addToGoogle" target="_blank" rel="noopener" href="#">Googleカレンダーで開く</a>
+            </div>
+          </div>
+          <div class="photo" role="img" aria-label="二人のイメージ写真（差し替え推奨）">
+            写真をここに
+          </div>
+        </div>
+      </section>
+
+      <!-- Details -->
+      <section id="details">
+        <div class="container grid cols-2">
+          <div class="card">
+            <h2>ご案内</h2>
+            <p class="lead">この度、私たち <strong>ひろき</strong> と <strong>みく</strong> は、下記のとおり挙式・披露宴を執り行う運びとなりました。ご多用のところ恐縮ですが、ぜひご臨席賜りますようお願い申し上げます。</p>
+            <div class="facts">
+              <div class="fact"><b>日時</b><span id="factDate">2025年12月6日（土） 11:00〜</span></div>
+              <div class="fact"><b>会場</b><span id="factVenue">報徳二宮神社（神奈川・小田原）</span></div>
+              <div class="fact"><b>ドレスコード</b><span>セミフォーマル（季節に応じた装いで）</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <h2>メッセージ</h2>
+            <p>皆さまへの感謝の気持ちを胸に、穏やかで温かなひとときになればと願っています。短い時間ではございますが、どうぞゆっくりお過ごしください。</p>
+            <ul>
+              <li>お車でお越しの場合は近隣のコインパーキングをご利用ください。</li>
+              <li>お祝いはお気持ちだけで十分です。手ぶらでお越しください。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Schedule -->
+      <section id="schedule">
+        <div class="container card">
+          <h2>当日のタイムライン</h2>
+          <div class="timeline" id="timeline">
+            <div class="tl-item">
+              <div class="tl-time">10:30</div>
+              <div class="tl-note">受付開始（会場ロビー）</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-time">11:00</div>
+              <div class="tl-note">挙式</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-time">12:00</div>
+              <div class="tl-note">披露宴</div>
+            </div>
+            <div class="tl-item">
+              <div class="tl-time">14:30</div>
+              <div class="tl-note">お開き</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Access -->
+      <section id="access">
+        <div class="container grid cols-2">
+          <div class="card">
+            <h2>アクセス</h2>
+            <p class="lead" id="venueAddress">報徳二宮神社（〒250-0014 神奈川県小田原市城内8-10）</p>
+            <div class="hero-actions">
+              <a class="btn" id="openMap" target="_blank" rel="noopener" href="#">Googleマップを開く</a>
+              <button class="btn" id="copyAddress" type="button">住所をコピー</button>
+            </div>
+            <ul>
+              <li>JR・小田急線 <strong>小田原駅</strong> 東口より徒歩約10分</li>
+              <li>駅周辺からタクシーのご利用も便利です</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="map" aria-label="地図">
+              <iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src=""></iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery (optional images) -->
+      <section>
+        <div class="container">
+          <h2>ギャラリー</h2>
+          <p class="lead">お好きな写真を差し替えてください（/images 配下など）。</p>
+          <div class="gallery">
+            <div class="thumb"></div>
+            <div class="thumb"></div>
+            <div class="thumb"></div>
+            <div class="thumb"></div>
+            <div class="thumb"></div>
+            <div class="thumb"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- RSVP -->
+      <section id="rsvp">
+        <div class="container card">
+          <h2>出欠のご回答</h2>
+          <p class="lead">フォームはメール起動（mailto）で送信します。Googleフォーム等に差し替える場合は末尾のスクリプト内の <code>SUBMIT_MODE</code> を変更してください。</p>
+          <form class="rsvp" id="rsvpForm">
+            <div class="field">
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" required placeholder="山田 太郎" />
+            </div>
+            <div class="field">
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" required placeholder="guest@example.com" />
+            </div>
+            <div class="field">
+              <label for="attend">ご出欠</label>
+              <select id="attend" name="attend" required>
+                <option value="" hidden>選択してください</option>
+                <option value="attend">出席します</option>
+                <option value="absent">欠席します</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="guests">同伴者</label>
+              <select id="guests" name="guests">
+                <option value="0" selected>なし</option>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+              </select>
+              <p class="hint">お子さま連れも歓迎です。人数をご記入ください。</p>
+            </div>
+            <div class="field">
+              <label for="memo">アレルギー／連絡事項</label>
+              <textarea id="memo" name="memo" placeholder="例）ナッツアレルギーあり"></textarea>
+            </div>
+            <div class="hero-actions rsvp-actions">
+              <button class="btn primary" type="submit">回答を送信</button>
+              <button class="btn" type="reset">リセット</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="container card">
+          <h2>よくあるご質問</h2>
+          <details>
+            <summary>ご祝儀やプレゼントは必要ですか？</summary>
+            <p>お気持ちだけで十分です。身軽にお越しください。</p>
+          </details>
+          <details>
+            <summary>写真撮影は可能ですか？</summary>
+            <p>挙式中の撮影はご遠慮ください。披露宴は歓迎です。</p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        Made with ♥︎ by Hiroki & Miku
+      </div>
+    </footer>
+
+    <script>
+      // ==========================
+      // Config – ここを編集すると一括で内容が変わります
+      // ==========================
+      const CONFIG = {
+        couple: { groom: "Hiroki", bride: "Miku" },
+        // 式の日時（JST）
+        start: "2025-12-06T11:00:00+09:00",
+        end:   "2025-12-06T15:00:00+09:00",
+        title: "Hiroki & Miku Wedding",
+        // 会場情報
+        venue: {
+          name: "報徳二宮神社",
+          address: "〒250-0014 神奈川県小田原市城内8-10",
+          mapQuery: "報徳二宮神社 小田原"
+        },
+        // 出欠送信先（mailto方式）
+        rsvp: {
+          to: "you@example.com", // ← あなたのメールに変更
+          subject: "【出欠回答】Hiroki & Miku Wedding",
+        },
+        // 送信モード: "mailto" | "webhook" (例: Googleフォーム/Apps Script等)
+        SUBMIT_MODE: "mailto",
+        webhookEndpoint: "", // SUBMIT_MODEがwebhookのときに使用
+        timezone: "Asia/Tokyo",
+      };
+
+      // ==========================
+      // Helpers
+      // ==========================
+      const $ = (sel, el = document) => el.querySelector(sel);
+      const fmtDateJP = (iso) => {
+        const d = new Date(iso);
+        const f = new Intl.DateTimeFormat('ja-JP', { dateStyle: 'long', timeStyle: 'short' });
+        return f.format(d);
+      };
+      const icsDate = (iso) => {
+        const d = new Date(iso);
+        // → UTC YYYYMMDDTHHMMSSZ
+        const pad = (n) => String(n).padStart(2, '0');
+        return `${d.getUTCFullYear()}${pad(d.getUTCMonth()+1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}${pad(d.getUTCSeconds())}Z`;
+      };
+
+      // ==========================
+      // Countdown
+      // ==========================
+      function startCountdown() {
+        const el = document.getElementById('countdown');
+        const target = new Date(CONFIG.start).getTime();
+        const tick = () => {
+          const now = Date.now();
+          const diff = Math.max(0, target - now);
+          const days = Math.floor(diff / (1000*60*60*24));
+          const hours = Math.floor((diff / (1000*60*60)) % 24);
+          const minutes = Math.floor((diff / (1000*60)) % 60);
+          el.textContent = `${new Date(CONFIG.start).toLocaleDateString('ja-JP')} まであと ${days}日 ${hours}時間 ${minutes}分`;
+        };
+        tick();
+        setInterval(tick, 60 * 1000);
+      }
+
+      // ==========================
+      // Fill facts & map links
+      // ==========================
+      function hydrateFacts() {
+        document.getElementById('factDate').textContent = fmtDateJP(CONFIG.start);
+        document.getElementById('factVenue').textContent = `${CONFIG.venue.name}（神奈川・小田原）`;
+        const addrEl = document.getElementById('venueAddress');
+        addrEl.textContent = `${CONFIG.venue.name}（${CONFIG.venue.address}）`;
+
+        const q = encodeURIComponent(CONFIG.venue.mapQuery || `${CONFIG.venue.name} ${CONFIG.venue.address}`);
+        const gmap = `https://www.google.com/maps/search/?api=1&query=${q}`;
+        const gmapEmbed = `https://www.google.com/maps?q=${q}&output=embed`;
+        const openMap = document.getElementById('openMap');
+        const mapFrame = document.getElementById('mapFrame');
+        openMap.href = gmap;
+        mapFrame.src = gmapEmbed;
+
+        document.getElementById('copyAddress').addEventListener('click', async () => {
+          await navigator.clipboard.writeText(`${CONFIG.venue.name} ${CONFIG.venue.address}`);
+          alert('住所をコピーしました');
+        });
+      }
+
+      // ==========================
+      // Calendar buttons
+      // ==========================
+      function setupCalendarButtons() {
+        const icsBtn = document.getElementById('addToCalendar');
+        const gcal = document.getElementById('addToGoogle');
+        const DTSTART = icsDate(CONFIG.start);
+        const DTEND  = icsDate(CONFIG.end);
+
+        icsBtn.addEventListener('click', () => {
+          const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Hiroki & Miku//Invitation//JP\nBEGIN:VEVENT\nUID:${crypto.randomUUID()}\nDTSTAMP:${icsDate(new Date().toISOString())}\nDTSTART:${DTSTART}\nDTEND:${DTEND}\nSUMMARY:${CONFIG.title}\nLOCATION:${CONFIG.venue.name} ${CONFIG.venue.address}\nDESCRIPTION:ご招待ページ: ${location.href}\nEND:VEVENT\nEND:VCALENDAR`;
+          const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = `${CONFIG.title.replaceAll(' ', '_')}.ics`;
+          document.body.appendChild(a); a.click(); a.remove();
+        });
+
+        const gUrl = new URL('https://calendar.google.com/calendar/render');
+        gUrl.searchParams.set('action', 'TEMPLATE');
+        gUrl.searchParams.set('text', CONFIG.title);
+        gUrl.searchParams.set('dates', `${DTSTART}/${DTEND}`);
+        gUrl.searchParams.set('location', `${CONFIG.venue.name} ${CONFIG.venue.address}`);
+        gUrl.searchParams.set('details', 'ご招待ページ: ' + location.href);
+        gcal.href = gUrl.toString();
+      }
+
+      // ==========================
+      // RSVP form submit
+      // ==========================
+      function setupRSVP() {
+        const form = document.getElementById('rsvpForm');
+        form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const data = Object.fromEntries(new FormData(form).entries());
+          const lines = [
+            `お名前: ${data.name}`,
+            `メール: ${data.email}`,
+            `出欠: ${data.attend === 'attend' ? '出席' : '欠席'}`,
+            `同伴者: ${data.guests}名`,
+            `メモ: ${data.memo || ''}`,
+            `送信時刻: ${new Date().toLocaleString('ja-JP')}`
+          ];
+
+          if (CONFIG.SUBMIT_MODE === 'mailto') {
+            const body = encodeURIComponent(lines.join('\n'));
+            const subject = encodeURIComponent(CONFIG.rsvp.subject);
+            const to = CONFIG.rsvp.to;
+            window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+            alert('メール送信画面が開きます。内容をご確認のうえ送信してください。');
+          } else if (CONFIG.SUBMIT_MODE === 'webhook' && CONFIG.webhookEndpoint) {
+            try {
+              const res = await fetch(CONFIG.webhookEndpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...data, event: CONFIG.title }) });
+              if (!res.ok) throw new Error('送信エラー');
+              alert('送信しました。ご回答ありがとうございます！');
+              form.reset();
+            } catch (err) {
+              console.error(err);
+              alert('送信に失敗しました。しばらくしてから再度お試しください。');
+            }
+          } else {
+            alert('送信設定（SUBMIT_MODE）が未設定です。');
+          }
+        });
+      }
+
+      // Init
+      startCountdown();
+      hydrateFacts();
+      setupCalendarButtons();
+      setupRSVP();
+    </script>
+  </body>
+</html>
